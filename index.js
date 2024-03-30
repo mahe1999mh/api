@@ -1,14 +1,26 @@
+const express = require("express");
+const chats = require("./data/data");
 
-const express = require('express');
+require("dotenv").config();
+
 const app = express();
-require('dotenv').config();
+app.use(express.json());
 
-const port = process.env.PORT; 
+const port = process.env.PORT;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
 
+app.get("/api/chats", (req, res) => {
+  res.send(chats);
+});
+
+
+app.get("/api/chats/:id", (req, res) => {
+  const singleChat = chats.find((c) => c._id == req.params.id);
+  res.send(singleChat);
+});
 
 
 app.listen(port, () => {
