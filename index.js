@@ -1,12 +1,17 @@
 
 const express = require('express');
+const path = require('path');
 const app = express();
 require('dotenv').config();
 
-const port = process.env.PORT || 3000; 
+const port = process.env.PORT; 
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
+});
+
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'login.html'));
 });
 
 app.listen(port, () => {
