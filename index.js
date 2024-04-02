@@ -1,4 +1,5 @@
 const express = require("express");
+const userRoutes = require("./routes/userRoutes");
 const chats = require("./data/data");
 const cors = require('cors');
 const connectDB = require("./config/db");
@@ -18,6 +19,9 @@ const port = process.env.PORT;
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+app.use("/api/user",userRoutes)
+
 
 app.get("/api/chats", (req, res) => {
   res.send(chats);
