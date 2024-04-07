@@ -3,6 +3,7 @@ const userRoutes = require("./routes/userRoutes");
 const chats = require("./data/data");
 const cors = require('cors');
 const connectDB = require("./config/db");
+const { authUser } = require("./controllers/userControllers");
 
 
 
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/user",userRoutes)
+app.use("/api/user/login",authUser)
 
 
 app.get("/api/chats", (req, res) => {
