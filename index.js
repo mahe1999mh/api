@@ -15,7 +15,10 @@ app.use(express.json());
 
 // Define CORS options
 const corsOptions = {
-  origin: ['https://testapi-peach.vercel.app', 'http://localhost:8010'],
+  origin: '*',
+  credentials: true, // Allow cookies for authenticated requests (if applicable)
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Origin', 'Accept'],
+  methods: 'GET, HEAD, PUT, PATCH, POST, DELETE', // Allowed HTTP methods
 };
 
 // Enable CORS with specific options
