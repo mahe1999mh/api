@@ -12,7 +12,14 @@ require("dotenv").config();
 connectDB()
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// Define CORS options
+const corsOptions = {
+  origin: ['https://testapi-peach.vercel.app', 'http://localhost:8010'],
+};
+
+// Enable CORS with specific options
+app.use(cors(corsOptions));
 
 
 const port = process.env.PORT;
