@@ -1,50 +1,36 @@
 const express = require("express");
 const userRoutes = require("./routes/userRoutes");
-const chats = require("./data/data");
-const cors = require('cors');
+const cors = require("cors");
 const connectDB = require("./config/db");
 const { authUser } = require("./controllers/userControllers");
 
-
-
 require("dotenv").config();
 
-connectDB()
+connectDB();
 const app = express();
 app.use(express.json());
 
 // Define CORS options
 const corsOptions = {
-  origin: '*',
-  credentials: true, // Allow cookies for authenticated requests (if applicable)
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Origin', 'Accept'],
-  methods: 'GET, HEAD, PUT, PATCH, POST, DELETE', // Allowed HTTP methods
+  origin: "*",
+  credentials: true,
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-Requested-With",
+    "Origin",
+    "Accept",
+  ],
+  methods: "GET, HEAD, PUT, PATCH, POST, DELETE", // Allowed HTTP methods
 };
 
 // Enable CORS with specific options
 app.use(cors(corsOptions));
 
-
 const port = process.env.PORT;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.use("/api/user",userRoutes)
-app.use("/api/user/login",authUser)
-
-
-app.get("/api/chats", (req, res) => {
-  res.send(chats);
-});
-
-
-app.get("/api/chats/:id", (req, res) => {
-  const singleChat = chats.find((c) => c._id == req.params.id);
-  res.send(singleChat);
-});
-
+app.use("/api/user", userRoutes);
+app.use("/api/user/login", authUser);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
