@@ -9,23 +9,7 @@ require("dotenv").config();
 connectDB();
 const app = express();
 app.use(express.json());
-
-// Define CORS options
-const corsOptions = {
-  origin: "*",
-  credentials: true,
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "X-Requested-With",
-    "Origin",
-    "Accept",
-  ],
-  methods: "GET, HEAD, PUT, PATCH, POST, DELETE", // Allowed HTTP methods
-};
-
-// Enable CORS with specific options
-app.use(cors(corsOptions));
+app.use(cors());
 
 const port = process.env.PORT;
 
